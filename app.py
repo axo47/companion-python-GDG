@@ -8,12 +8,12 @@ app = Flask(__name__)
 
 
 runner = None
-character_exists = os.path.exists('character.py')
+character_exists = os.path.exists('character_cv.py')
 
 if character_exists:
-    import character
+    import character_cv
     runner = InMemoryRunner(
-        agent=character.root_agent,
+        agent=character_cv.root_agent,
         app_name="Demo App",
     )
 
