@@ -130,3 +130,25 @@ body {
     width: 24px;
     height: 24px;
 }
+
+#upload-button {
+    width: 100%;
+    padding: 0.9rem;
+    background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+#upload-button:hover {
+    opacity: 0.9;
+}
+
+#upload-button:active {
+    transform: scale(0.98);
+}
