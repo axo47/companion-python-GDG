@@ -37,9 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    populateVoiceList();
-    if (speechSynthesis.onvoiceschanged !== undefined) {
-        speechSynthesis.onvoiceschanged = populateVoiceList;
+    if (voiceSelect) {
+        populateVoiceList();
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = populateVoiceList;
+        }
     }
 
     const typewriter = (text, element, speed = 50) => {
@@ -81,10 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(lipSyncInterval);
 
         const utterance = new SpeechSynthesisUtterance(text);
-        const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
-        const selectedVoice = voices.find(voice => voice.name === selectedOption);
-        if (selectedVoice) {
-            utterance.voice = selectedVoice;
+        if (voiceSelect) {
+            const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+            const selectedVoice = voices.find(voice => voice.name === selectedOption);
+            if (selectedVoice) {
+                utterance.voice = selectedVoice;
+            }
         }
 
         utterance.onstart = () => {
@@ -140,19 +144,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    sendButton.addEventListener('click', handleSendMessage);
+    if (sendButton) {
+        sendButton.addEventListener('click', handleSendMessage);
+    }
 
-    textInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            handleSendMessage();
-        }
-    });
+    if (textInput) {
+        textInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSendMessage();
+            }
+        });
 
-    textInput.addEventListener('input', () => {
-        textInput.style.height = 'auto';
-        textInput.style.height = `${textInput.scrollHeight}px`;
-    });
+        textInput.addEventListener('input', () => {
+            textInput.style.height = 'auto';
+            textInput.style.height = `${textInput.scrollHeight}px`;
+        });
+    }
 
 
     document.getElementById('cv-upload').addEventListener('change', async (e) => {
