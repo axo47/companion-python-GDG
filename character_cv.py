@@ -56,11 +56,8 @@ def search_historical_candidates(candidate_profile_text: str) -> str:
     except Exception as e:
         return f"Error accessing vector database: {e}"
 
-search_tool = FunctionTool(
-    name="search_historical_candidates",
-    description="Searches the vector database for historical candidate matches to retrieve past ACCEPT/REJECT decisions.",
-    function=search_historical_candidates
-)
+search_tool = FunctionTool(func=search_historical_candidates)
+
 
 
 
