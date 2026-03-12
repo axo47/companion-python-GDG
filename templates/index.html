@@ -19,6 +19,8 @@
         </div>
         <p id="status">Ask me something!</p>
         <footer class="chat-input-area">
+           <input type="file" id="cv-upload" accept=".pdf" style="display:none">
+            <button id="upload-button" onclick="document.getElementById('cv-upload').click()">📄 Upload CV</button>
             <select id="voice-select"></select>
             <textarea id="text-input" placeholder="Ask me anything..."></textarea>
             <button id="send-button">

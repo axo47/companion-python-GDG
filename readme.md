@@ -62,6 +62,7 @@ cd ~/companion-python-GDG
 python -m venv env
 source env/bin/activate
 pip install -r requirements.txt
+python preprocessing.py
 python app.py
 ```
 

@@ -153,4 +153,28 @@ document.addEventListener('DOMContentLoaded', () => {
         textInput.style.height = 'auto';
         textInput.style.height = `${textInput.scrollHeight}px`;
     });
+
+
+    document.getElementById('cv-upload').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    status.textContent = "Analyzing CV...";
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+        const response = await fetch('/upload_cv', { method: 'POST', body: formData });
+        const data = await response.json();
+        if (data.error) {
+            typewriter(data.error, status);
+        } else {
+            typewriter(data.response, status);
+            speak(data.response);
+        }
+    } catch (error) {
+        typewriter('Error uploading CV.', status);
+    }
+    e.target.value = '';
+});
 });
